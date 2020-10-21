@@ -1,0 +1,3 @@
+(test
+ (name backwardsPrime)
+ (libraries backwardsPrime oUnit))
