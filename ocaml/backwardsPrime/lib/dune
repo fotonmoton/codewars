@@ -1,3 +1,5 @@
 (library
  (name backwardsPrime)
- (libraries str))
+ (public_name backwardsPrime)
+ (wrapped false)
+ (libraries batteries str parmap))

@@ -1,18 +1,14 @@
-let init, rev, exists, filter = List.(init, rev, exists, filter)
+let rev, fold_left, filter = List.(rev, fold_left, filter)
 
 let split, regexp_string = Str.(split, regexp_string)
 
+let range = Range.(range)
+
+let is_prime = Prime.(is_prime_aks)
+
+let parmap = Parmap.(parmap)
+
 let concat = String.(concat)
-
-let range start finish = init (finish - start + 1) (( + ) start)
-
-let divides number divider = number mod divider = 0
-
-let is_prime number =
-  match number with
-  | 0 | 1 -> false
-  | 2 -> true
-  | n -> n - 1 |> range 2 |> exists (divides number) |> not
 
 let flip number =
   number
@@ -28,3 +24,13 @@ let backwards num =
   (not (is_palindrome num)) && is_prime num && is_prime (flip num)
 
 let backwards_prime start finish = range start finish |> filter backwards
+
+let backwards_prime_parallel start finish =
+  let marked =
+    parmap ~ncores:32
+      (fun num -> (num, backwards num))
+      (Parmap.L (range start finish))
+  in
+  marked
+  |> fold_left (fun acc (num, prime) -> if prime then num :: acc else acc) []
+  |> rev
