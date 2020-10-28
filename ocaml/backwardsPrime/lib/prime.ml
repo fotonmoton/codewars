@@ -1,12 +1,5 @@
 let ( >> ) f g x = g (f x)
 
-let time f x =
-  let t = Sys.time () in
-  let fx = f x in
-  Printf.printf "Execution time: %fs\n" (Sys.time () -. t) ;
-  flush stdout ;
-  fx
-
 let is_prime number =
   let range = Range.(range) in
   let divides number divider = number mod divider = 0 in
@@ -47,8 +40,7 @@ let pascal_row row_index =
     | 0 -> ()
     | i -> row.(i) <- compute row.(i - 1) row_index i
   in
-  iteri (time set_elem) row ;
-  row
+  iteri set_elem row ; row
 
 let is_prime_aks number =
   (*
