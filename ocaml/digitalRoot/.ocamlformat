@@ -1,0 +1,6 @@
+profile = ocamlformat
+break-infix = fit-or-vertical
+break-cases = fit-or-vertical
+# break-collection-expressions=fit-or-vertical
+# break-fun-decl=fit-or-vertical
+# break-separators=after

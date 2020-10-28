@@ -1,0 +1,4 @@
+(executable
+ (public_name digitalRoot)
+ (name main)
+ (libraries digitalRoot))
